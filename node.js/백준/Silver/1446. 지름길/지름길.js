@@ -13,24 +13,17 @@ const arr = Array.from({length:10000},(_,index)=>index)
 
 input = input.sort((a,b)=>a[0]-b[0])
 
-arr[0] = 0
+for(let [start,end,dis] of input){
+    // 지름길 정보 입력
+    arr[end] = Math.min(arr[end],arr[start]+dis)
 
-input.map((item)=>{
-    const [start,end,dis] = item;
-    const realGap = end-start
-    arr[end] = Math.min(dis+arr[start],arr[end],realGap + arr[start])
-})
+    // 그리고 지름길 정보를 바탕으로 end에서부터 d까지 모든 정보 갱신
+    for(let i=end+1;i<=d;i++){
+        if(arr[i]>arr[end]+i-end){
 
-for(let i=1;i<=d;i++){
-    arr[i] = Math.min(arr[i],arr[i-1]+1)
-
-    input.forEach((item)=>{
-        const [start,end,dis] = item;
-        if(start===i && end<=d){
-            arr[end]=Math.min(arr[end],arr[i]+dis)
+            arr[i] = arr[end]+i-end  
         }
-    })
+    }
 }
-
 
 console.log(arr[d])
