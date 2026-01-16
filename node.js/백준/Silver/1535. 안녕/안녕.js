@@ -6,11 +6,6 @@ let input = require('fs')
 .map((item)=>item.split(' '))
 .map((item)=>item.map(Number))
 
-// 2차원 배열
-// y축은 몇번째 사람인지
-// x 값은 현재 체력
-// dp[y][x] 는 y 번째 사람일 때, 체력 x일때 행복 최대값
-
 const n = input.shift()[0];
 const h = input.shift()
 const happy = input.shift()
@@ -36,5 +31,6 @@ let max = 0;
 for(let i=0;i<dp[n].length;i++){
     max = Math.max(dp[n][i].happy,max)
 }
+
 
 console.log(max)
